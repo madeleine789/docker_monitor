@@ -5,13 +5,13 @@ from docker_stats import Client
 import re
 import os
 
-c = Client(base_url='unix://var/run/docker.sock', version='1.9', timeout=10)
+from app import client
 
 
 def general_info(container):
 
 	general = {}
-	detail = c.inspect_container(container)
+	detail = client.inspect_container(container)
 	general['name'] = detail['Name']
 	general['hostname'] = detail['Hostname']
 	general['created'] = detail['Created']
@@ -23,7 +23,7 @@ def general_info(container):
 
 def processes_running(container):
 	processes = []
-	for p in c.top(container)['Processes']:
+	for p in client.top(container)['Processes']:
 		# print "PID: %d USER: %s CMD: %s".format(p[0], p[1], p[2])
 		p = {}
 		p['PID'] = p[0]
@@ -33,7 +33,7 @@ def processes_running(container):
 	return processes
 
 def display_cpu(container, type): 				# system, user, all
-	detail = c.inspect_container(container)
+	detail = client.inspect_container(container)
 	if bool(detail["State"]["Running"]):
 		container_id = detail['Id']
 		cpu_usage = {}
@@ -53,23 +53,23 @@ def display_cpu(container, type): 				# system, user, all
 
 
 def display_ip(container):
-	detail = c.inspect_container(container)
+	detail = client.inspect_container(container)
 	print(detail['NetworkSettings']['IPAddress'])
 
 
 def display_memory(container):
-	detail = c.stats(container)
+	detail = client.stats(container)
 	mem_stats = detail['memory_stats']
 	return mem_stats
 
 
 def display_network(container):
-	detail = c.stats(container)
+	detail = client.stats(container)
 	network_stats = detail['network']
 	return network_stats
 
 def display_status(container):
-	detail = c.inspect_container(container)
+	detail = client.inspect_container(container)
 	state = detail["State"]
 	if bool(state["Paused"]):
 		print(1)  # Paused
