@@ -33,4 +33,4 @@ def container(id):
 	status = {}
 	processes = stats.processes_running(id)
 
-	return render_template('container.html', general=general, cpu=cpu, memory=memory, status=status, processes=processes)
+	return render_template('container.html', id=id, general=general, cpu=cpu, memory=memory, status=status, processes=processes)

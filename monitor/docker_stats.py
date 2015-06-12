@@ -9,12 +9,15 @@ c = Client(base_url='unix://var/run/docker.sock', version='1.9', timeout=10)
 def system_wide_info():
 	system_info = {}
 	info = c.info()
+
 	system_info['containers'] = info['Containers']
 	system_info['images'] = info['Images']
 	system_info['driver'] = info['Driver']
 	system_info['mem'] = info['MemTotal']
 	system_info['kernel'] = info['KernelVersion']
 	system_info['ncpu'] = info['NCPU']
+	system_info['os'] = info['OperatingSystem']
+	system_info['index'] = info['IndexServerAddress']
 
 	return system_info
 

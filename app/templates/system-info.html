@@ -34,12 +34,22 @@
     </nav>
 
     <div class="container-fluid">
-        <h1 class="page-header">System-wide info</h1>
         <div class="row">
-
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-title lead">
+                    System-wide info
+                </div>
+                <div class="panel-body">
+                    <p class="lead"><b>Operating system:</b>  {{ info.os }}</p>
+                    <p class="lead"><b>Kernel version:</b>  {{ info.kernel }}  </p>
+                    <p class="lead"><b>Driver:</b>  {{ info.driver }} </p>
+                    <p class="lead"><b>Images:</b>  {{ info.images }} </p>
+                    <p class="lead"><b>Containers:</b>  {{ info.containers }} </p>
+                    <p class="lead"><b>Total memory:</b>  {{ info.mem }} </p>
+                    <p class="lead"><b>Number of CPUs:</b>  {{ info.ncpu }} </p>
+                </div>
+            </div>
         </div>
     </div>
-
-  <!--script src="js/scripts.js"></script-->
 </body>
 </html>
