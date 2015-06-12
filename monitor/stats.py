@@ -1,11 +1,9 @@
 __author__ = 'mms'
 
-
-from docker_stats import Client
 import re
 import os
 
-from app import client
+from monitor import *
 
 
 def general_info(container):
