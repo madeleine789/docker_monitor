@@ -36,16 +36,17 @@
     <div class="container-fluid">
         
         <div class="jumbotron">
-          <h1 class="page-header">Containers</h1>
-            {% for id, container in containers.iteritems() %}
+          <h1 class="page-header">Images</h1>
+            {% for image in images %}
             <div class="panel panel-primary center-block" style="width : 100 px">
                 <div class="panel-heading panel-title lead">
-                    Container <a href="/containers/{{ id }}"><b>{{ id }} </b> </a>
+                    Image  <b> {{ image.id }} </b> 
                 </div>
                 <div class="panel-body">
-                    <p class="lead"><b>Name:</b>  {{ container.name }}</p>
-                    <p class="lead"><b>Command:</b>  {{ container.cmd }}  </p>
-                    <p class="lead"><b>Status:</b>  {{ container.status }} </p>
+                    <p class="lead"><b>Name:</b> {{ image.name }}  </p>
+                    <p class="lead"><b>Created:</b>  {{ image.created }} </p>
+                    <p class="lead"><b>Size:</b>  {{ image.size }}</p>
+                    <p class="lead"><b>Virtual size:</b>  {{ image.virtual_size }}</p>
                 </div>
             </div>
             {% endfor %}

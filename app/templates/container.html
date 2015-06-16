@@ -21,45 +21,117 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index"><strong>Docker Monitor</strong></a>
+          <a class="navbar-brand" href="/index"><strong>Docker Monitor</strong></a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="system-info">  System-wide info <span class="sr-only">(current)</span></a></li>
-            <li><a href="containers.html"> Containers </a></li>
+            <li class="active"><a href="/system-info">  System <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/images"> Images </a></li>
+            <li class="active"><a href="/containers"> Containers </a></li>
           </ul>
         </div>
       </div>
     </nav>
 
     <div class="container-fluid">
-        <h1>Container {{ id }}</h1>
-        <ul class="nav nav-tabs">
-          <li class="active"><a aria-expanded="true" href="#general" data-toggle="tab">General</a></li>
-          <li class=""><a aria-expanded="false" href="#memory" data-toggle="tab">Memory</a></li>
-          <li class=""><a aria-expanded="false" href="#cpu" data-toggle="tab">CPU</a></li>
-          <li class=""><a aria-expanded="false" href="#network" data-toggle="tab">Network</a></li>
-          <li class=""><a aria-expanded="false" href="#processes" data-toggle="tab">Processes</a></li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-          <div class="tab-pane fade active in" id="general">
-            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+      
+      <div class="jumbotron">
+        <h1 class="page-header"> Container </h1>
+          <div class="panel panel-primary center-block" style="width : 100 px">
+              <div class="panel-heading panel-title lead">
+                  General info
+              </div>
+              <div class="panel-body">
+                  <p class="lead"><b>Id:</b> {{ id }}</p>
+                  <p class="lead"><b>Name:</b>  {{ general.name }}</p>
+                  <p class="lead"><b>Hostname:</b>  {{ general.hostname }}  </p>
+                  <p class="lead"><b>IP:</b>  {{ general.ip }}  </p>
+                  <p class="lead"><b>Created at:</b>  {{ general.created }} </p>
+                  <p class="lead"><b>Started at:</b>  {{ general.started_at }} </p>
+              </div>
           </div>
-          <div class="tab-pane fade" id="memory">
-            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+
+      <div class="panel panel-primary center-block" style="width : 100 px">
+              <div class="panel-heading panel-title lead">
+                  Processes
+              </div>
+              <div class="panel-body">
+                  {% for process in processes %}
+                  <p class="lead"><b>PID:</b>  {{ process.PID }}</p>
+                  <p class="lead"><b>Command:</b>  {{ process.CMD }}  </p>
+                  <p class="lead"><b>User:</b>  {{ process.USER }} </p>
+                  <hr>
+                  {% endfor %}
+              </div>
+      </div>
+
+      <div class="panel panel-primary center-block" style="width : 100 px">
+              <div class="panel-heading panel-title lead">
+                  Memory stats
+              </div>
+              <div class="panel-body">
+                  <p class="lead"><b>Usage:</b>  {{ memory.usage }}</p>
+                  <p class="lead"><b>Max usage:</b>  {{ memory.max_usage }}  </p>
+                  <p class="lead"><b>Limit:</b>  {{ memory.limit }} </p>
+                  <p class="lead"><b>Mapped files:</b>  {{ memory.stats.mapped_file }} </p>
+                  <p class="lead"><b>Total Cache:</b>  {{ memory.stats.total_cache }} </p>
+                  <p class="lead"><b>Total RSS:</b>  {{ memory.stats.total_rss }} </p>
+                  <p class="lead"><b>Total page faults:</b>  {{ memory.stats.total_pgfault }} </p>
+                  <p class="lead"><b>Total active anonymous memory:</b>  {{ memory.stats.total_active_anon }} </p>
+                  <p class="lead"><b>Total inactive anonymous memory:</b>  {{ memory.stats.total_inactive_anon }} </p>
+                  <p class="lead"><b>Total unevictable memory:</b>  {{ memory.stats.total_unevictable }} </p>
+              </div>
           </div>
-          <div class="tab-pane fade" id="cpu">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
-          </div>
-          <div class="tab-pane fade" id="network">
-            <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
-          </div>
-          <div class="tab-pane fade" id="processes">
-            <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
-          </div>
+
+          <div class="panel panel-primary center-block" style="width : 100 px">
+            <div class="panel-heading panel-title lead">
+                Block I/O stats
+            </div>
+            <div class="panel-body">
+                <!--p class="lead"><b>Sectors:</b>  {{ blkio.sectors }} </p-->
+                <p class="lead"><b>Bytes read/written:</b>  {{ blkio.serviced_total_b }}  ( read: {{ blkio.serviced_read_b }} | written: {{ blkio.serviced_write_b }}) </p>
+                <p class="lead"><b>I/O operations performed:</b>  {{ blkio.serviced_total }} ( reads: {{ blkio.serviced_read }} | writes: {{ blkio.serviced_write }} | sync: {{ blkio.serviced_sync }} | async: {{ blkio.serviced_async }})</p>
+                <!--p class="lead"><b>I/O operations queued:</b>  {{ blkio.io_queued }} </p-->
+          
+            </div>
         </div>
+    
+
+        <div class="panel panel-primary center-block" style="width : 100 px">
+            <div class="panel-heading panel-title lead">
+                CPU stats
+            </div>
+            <div class="panel-body">
+                <p class="lead"><b>Per CPU usage:</b>  {% for cpu in cpu.cpu_usage.percpu_usage %} {{cpu}}({{loop.index}}) <br/> {%endfor%} </p>
+                <p class="lead"><b>Usage in usermode:</b>  {{ cpu.cpu_usage.usage_in_usermode }}  </p>
+                <p class="lead"><b>Usage in kernelmode:</b>  {{ cpu.cpu_usage.usage_in_kernelmode }} </p>
+                <p class="lead"><b>Total usage:</b>  {{ cpu.cpu_usage.total_usage }} </p>
+                <p class="lead"><b>System CPU usage:</b>  {{ cpu.system_cpu_usage }} </p>
+            </div>
+        </div>
+
+        <div class="panel panel-primary center-block" style="width : 100 px">
+            <div class="panel-heading panel-title lead">
+                Network stats
+            </div>
+            <div class="panel-body">
+                <p class="lead"><b>RX bytes:</b>  {{ network.rx_bytes }}</p>
+                <p class="lead"><b>RX packets:</b>  {{ network.rx_packets }}  </p>
+                <p class="lead"><b>RX errors:</b>  {{ network.rx_errors }} </p>
+                <p class="lead"><b>RX dropped:</b>  {{ network.rx_dropped }} </p>
+                <p class="lead"><b>TX bytes:</b>  {{ network.tx_bytes }}</p>
+                <p class="lead"><b>TX packets:</b>  {{ network.tx_packets }}  </p>
+                <p class="lead"><b>TX errors:</b>  {{ network.tx_errors }} </p>
+                <p class="lead"><b>TX dropped:</b>  {{ network.tx_dropped }} </p>
+            </div>
+        </div>
+
+
     </div>
+</div>
+
+      
   <!--script src="js/scripts.js"></script-->
 </body>
 </html>
