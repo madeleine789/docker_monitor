@@ -1,6 +1,5 @@
-__author__ = 'mms'
 
-# !flask/bin/python
+# !docker/bin/python
 from app import app
 
 app.run(debug=True)
