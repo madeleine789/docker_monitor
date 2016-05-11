@@ -20,9 +20,9 @@ def system_info():
 
 @app.route('/containers')
 def containers():
-	running = docker_stats.containers_with_status(status='Running')
-	paused = docker_stats.containers_with_status(status='Paused')
-	exited = docker_stats.containers_with_status(status='ExitCode')
+	running = docker_stats.containers_with_status(status='running')
+	paused = docker_stats.containers_with_status(status='paused')
+	exited = docker_stats.containers_with_status(status='exited')
 	containers = docker_stats.containers()
 
 	return render_template('containers.html', running=running, paused=paused, exited=exited, containers=containers)

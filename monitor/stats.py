@@ -58,7 +58,8 @@ def memory_stats(container):
 def network_stats(container):
 	stats = client.stats(container)
 	for stat_obj in stats:
-		network_stats = json.loads(stat_obj)['network']
+		print stat_obj
+		network_stats = json.loads(stat_obj)['networks']
 		break
 	return network_stats
 

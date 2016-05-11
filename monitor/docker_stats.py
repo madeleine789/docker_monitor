@@ -20,11 +20,11 @@ def system_wide_info():
 	return system_info
 
 
-def containers_with_status(status='Running'):
+def containers_with_status(status='running'):
 	result = []
 	containers = client.containers(filters={'status': status})
 	for cont in containers:
-		container = {'id': cont['Id'], 'cmd': cont['Command'], 'status': cont['Status'], 'name': cont['Name']}
+		container = {'id': cont['Id'], 'cmd': cont['Command'], 'status': cont['Status'], 'names': cont['Names']}
 		# print "ID: %s CMD: %s STATUS: %s".format(container['Id'], container['Command'], container['Status'])
 		result.append(container)
 	return result
